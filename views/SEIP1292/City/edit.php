@@ -1,10 +1,10 @@
 <?php
 include_once('../../../vendor/autoload.php');
-use App\Bitm\SEIP1292\Book\Book;
-use App\Bitm\SEIP1292\Book\Utility;
+use App\Bitm\SEIP1292\Email\Email;
+use App\Bitm\SEIP1292\Email\Utility;
 
-$book= new Book();
-$singleItem=$book->prepare($_GET)->view();
+$email= new Email();
+$singleItem=$email->prepare($_GET)->view();
 //Utility::dd($singleItem);
 
 
@@ -16,7 +16,7 @@ $singleItem=$book->prepare($_GET)->view();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Book Title</title>
+    <title>Email</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../../../Resource/bootstrap/css/bootstrap.css">
@@ -27,12 +27,12 @@ $singleItem=$book->prepare($_GET)->view();
 <body>
 
 <div class="container">
-    <h2>Atomoic Project- Book</h2>
+    <h2>Atomoic Project- Email</h2>
     <form role="form" action="update.php" method="post">
         <div class="form-group">
-            <label>Edit book title:</label>
+            <label>Edit Email:</label>
             <input type="hidden" name="id"  value="<?php echo $singleItem->id?>">
-            <input type="text" name="title" class="form-control" id="email" value="<?php echo $singleItem->title?>">
+            <input type="text" name="email" class="form-control" id="email" value="<?php echo $singleItem->email?>">
         </div>
         <button type="submit" class="btn btn-default">Update</button>
     </form>

@@ -8,37 +8,7 @@ use App\Bitm\SEIP1292\Book\Book;
 use App\Bitm\SEIP1292\Utility\Utility;
 use App\Bitm\SEIP1292\Message\Message;
 $book = new Book();
-
-$totalItem=$book->count();
-//Utility::dd($totalItem);
-if(array_key_exists('itemPerPage',$_SESSION)) {
-    if(array_key_exists('itemPerPage',$_GET)){
-        $_SESSION['itemPerPage']=$_GET['itemPerPage'];
-    }
-
-}
-else{
-    $_SESSION['itemPerPage']=5;
-}
-$itemPerPage= $_SESSION['itemPerPage'];
-
-
-$noOfPage=ceil($totalItem/$itemPerPage);
-//Utility::d($noOfPage);
-$pagination="";
-if(array_key_exists('pageNo',$_GET)){
-    $pageNo= $_GET['pageNo'];
-}else {
-    $pageNo = 1;
-}
-for($i=1;$i<=$noOfPage;$i++){
-    $active=($i==$pageNo)?"active":"";
-    $pagination.="<li class='$active'><a href='index.php?pageNo=$i'>$i</a></li>";
-}
-
-$pageStartFrom=$itemPerPage*($pageNo-1);
-$allBook=$book->paginator($pageStartFrom,$itemPerPage);
-
+$allBook=$book->index();
 
 
 
@@ -49,16 +19,20 @@ $allBook=$book->paginator($pageStartFrom,$itemPerPage);
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../Resource/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="../../../Resource/bootstrap/js/bootstrap.js">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
 
 <div class="container">
-    <h2>All Book list</h2>
-
-    <a href="create.php" class="btn btn-info" role="button">Add Book Title</a> <a href="trashed.php" class="btn btn-primary" role="button">View Trashed Item</a><br><br>
-
+    <h2>All Book Lists</h2>
+<br><br>
+<div class="button">
+    <a href="create.php" class="btn btn-info" role="button">Add Book Title</a> <a href="trashed.php" class="btn btn-primary" role="button">View Trashed Item</a>
+</div>
     <div id="message">
         <?php
         if((array_key_exists('message',$_SESSION))&& !empty($_SESSION['message'])) {
@@ -66,20 +40,6 @@ $allBook=$book->paginator($pageStartFrom,$itemPerPage);
         }
         ?>
     </div>
-    <form role="form" action="index.php">
-        <div class="form-group">
-            <label for="sel1">Select item per page (select one):</label>
-            <select class="form-control" id="sel1" name="itemPerPage">
-                <option>5</option>
-                <option>10</option>
-                <option selected>15</option>
-                <option>20</option>
-                <option>25</option>
-            </select>
-            <button type="submit">GO!</button>
-
-        </div>
-    </form>
 
     <div class="table-responsive">
         <table class="table">
@@ -91,13 +51,16 @@ $allBook=$book->paginator($pageStartFrom,$itemPerPage);
                 <th>Action</th>
             </tr>
             </thead>
+            <hr>
+            <br>
+            <br>
             <tbody>
             <?php
             $sl=0;
             foreach ($allBook as $book){
                 $sl++?>
             <tr>
-                <td><?php echo $sl+$pageStartFrom?></td>
+                <td><?php echo $sl?></td>
                 <td><?php echo $book->id ?></td>
                 <td><?php echo $book->title ?></td>
                 <td><a href="view.php?id=<?php echo $book->id ?>" class="btn btn-info" role="button">View</a>
@@ -110,11 +73,6 @@ $allBook=$book->paginator($pageStartFrom,$itemPerPage);
 
             </tbody>
         </table>
-        <ul class="pagination">
-            <li><a href="#">Prev</a></li>
-            <?php echo $pagination ?>
-            <li><a href="#">Next</a></li>
-        </ul>
     </div>
 </div>
 <script>

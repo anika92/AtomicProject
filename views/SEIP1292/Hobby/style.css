@@ -1,0 +1,11 @@
+body {background-color:#e6ffff;}
+h2   {color:blue;padding-left: 40%;border-bottom: 2px solid blue; }
+p    {color:green;}
+.button{padding-left: 35%;}
+.table-responsive{padding-left: 20%;margin-top: 10px;
+    font-size: 10pt;}
+
+li {list-style-type: none;
+    font-size: 10pt;color:red;
+}
+.form{margin-top: 10%}

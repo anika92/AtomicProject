@@ -1,22 +1,19 @@
 <?php
-include_once('../../../vendor/autoload.php');
-use App\Bitm\SEIP1292\Book\Book;
-use App\Bitm\SEIP1292\Book\Utility;
+include_once ('../../../vendor/autoload.php');
+use App\Bitm\SEIP127236\Summary\Summary;
+use App\Bitm\SEIP127236\Utility\Utility;
 
-$book= new Book();
-$singleItem=$book->prepare($_GET)->view();
+$summary= new Summary();
+$singleItem=$summary->prepare($_GET)->view();
 //Utility::dd($singleItem);
 
 
 ?>
 
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Book Title</title>
+    <title>summary</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../../../Resource/bootstrap/css/bootstrap.css">
@@ -27,15 +24,18 @@ $singleItem=$book->prepare($_GET)->view();
 <body>
 
 <div class="container">
-    <h2>Atomoic Project- Book</h2>
+    <h2>Atomic Project- Summary</h2>
     <form role="form" action="update.php" method="post">
         <div class="form-group">
-            <label>Edit book title:</label>
-            <input type="hidden" name="id"  value="<?php echo $singleItem->id?>">
-            <input type="text" name="title" class="form-control" id="email" value="<?php echo $singleItem->title?>">
+            <label>Edit Summary:</label>
+            <input type="hidden" name="id"  value="<?php echo $singleItem["id"]?>">
+            <input type="text" name="name" class="form-control" id="email" value="<?php echo $singleItem["name"]?>">
+            <input type="text" name="summary" class="form-control" id="email" value="<?php echo $singleItem["summary"]?>">
         </div>
         <button type="submit" class="btn btn-default">Update</button>
     </form>
+
+
 </div>
 
 </body>

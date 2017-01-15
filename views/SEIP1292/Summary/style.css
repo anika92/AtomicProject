@@ -1,0 +1,19 @@
+body {
+
+    background:  #383839;
+  }
+.table{color:#ffffff;}
+h2   {color: #31b0d5;padding-left: 40%;border-bottom: 2px solid #204d74;
+}
+p    {color:#ffffff;}
+.button{padding-left: 35%;}
+.table-responsive{padding-left: 20%;margin-top: 10px;
+    font-size: 10pt;}
+
+li {list-style-type: none;
+    font-size: 10pt;color:red;
+}
+form{margin-top: 4%;margin-left : 40%}
+.rq{color:#b92c28}
+.form-group{color:#ffffff;}
+.form-control{width: auto;}
