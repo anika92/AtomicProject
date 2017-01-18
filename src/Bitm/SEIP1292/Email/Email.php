@@ -9,6 +9,7 @@ class Email
 
     public $id = "";
     public $name = "";
+    public $name1 = "";
     public $email = "";
     public $filterByTitle="";
     public $filterByDescription="";
