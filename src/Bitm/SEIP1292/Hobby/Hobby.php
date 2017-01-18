@@ -7,7 +7,7 @@ class Hobby
 {
     public $id = "";
     public $name = "";
-
+    public $name1 = "";
     public $hobby = "";
     public $conn = "";
 
