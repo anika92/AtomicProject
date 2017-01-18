@@ -8,6 +8,7 @@ Class Summary
 {
     public $id = "";
     public $name = "";
+    public $name1 = "";
     public $summary = "";
     public $filterByTitle="";
     public $filterByDescription="";
