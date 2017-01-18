@@ -6,7 +6,7 @@ use App\Bitm\SEIP1292\Utility\Utility;
 
 class ImageUploader{
     public $id="";
-    public $name1="";
+
     public $name="";
     public $image_name="";
     public $conn;
