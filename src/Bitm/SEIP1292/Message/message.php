@@ -1,5 +1,5 @@
 <?php
-namespace App\Bitm\SEIP1292\Book;
+namespace App\Bitm\SEIP1292\Message;
 if(!isset($_SESSION['message'])){
     session_start();
 

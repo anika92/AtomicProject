@@ -1,5 +1,5 @@
 <?php
-namespace App\Bitm\SEIP1292\Book;
+namespace App\Bitm\SEIP1292\Utility;
 class Utility{
     public static function d($data){
         echo "<pre>";

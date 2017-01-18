@@ -9,6 +9,10 @@ Class City
     public $name = "";
     public $city = "";
     public $conn;
+    public $filterByTitle="";
+    public $filterByDescription="";
+
+    public $search="";
     public $deleted_at;
 
     public function prepare($data = "")
@@ -21,6 +25,15 @@ Class City
         }
         if (array_key_exists("city", $data)) {
             $this->city = $data['city'];
+        }
+        if (array_key_exists("filterByTitle", $data)) {
+            $this->filterByTitle = $data['filterByTitle'];
+        }
+        if (array_key_exists("filterByDescription", $data)) {
+            $this->filterByDescription = $data['filterByDescription'];
+        }
+        if (array_key_exists("search", $data)) {
+            $this->search = $data['search'];
         }
         return $this;
     }
@@ -48,16 +61,27 @@ Class City
         }
 
     }
-    public function index()
-    {
-        $_allcity = array();
-        $query = "SELECT * FROM `city` WHERE `deleted_at` IS NULL";
-        $result = mysqli_query($this->conn, $query);
-        while ($row = mysqli_fetch_object($result)) {
-            $_allcity[] = $row;
+    public  function index(){
+        $_allCity=array();
+        $whereClause= " 1=1 ";
+        if(!empty($this->filterByTitle)) {
+            $whereClause .= " AND name LIKE '%".$this->filterByTitle."%'";
         }
-        return $_allcity;
+        if(!empty($this->filterByDescription)){
+            $whereClause .= " AND city LIKE '%".$this->filterByDescription."%'";
+        }
+        if(!empty($this->search)){
+            $whereClause .= " AND city LIKE '%".$this->search."%' OR  name LIKE '%".$this->search."%'";
+        }
+        $query= "SELECT * FROM `city` WHERE `deleted_at` IS NULL AND ".$whereClause;
+        //echo $query;
+        $result= mysqli_query($this->conn,$query);
+        while($row=mysqli_fetch_object($result)){
+            $_allCity[]=$row;
+        }
+        return $_allCity;
     }
+
 
     public function view(){
         $query="SELECT * FROM `city` WHERE `id`=".$this->id;
@@ -209,5 +233,41 @@ Class City
         }
 
 
+    }
+    public function count(){
+        $query="SELECT COUNT(*) AS totalItem FROM `city` WHERE `deleted_at` IS NULL ";
+        $result= mysqli_query($this->conn,$query);
+        $row= mysqli_fetch_assoc($result);
+        return $row['totalItem'];
+    }
+
+    public function paginator($pageStartFrom=0,$Limit=5){
+        $query="SELECT * FROM `city` WHERE `deleted_at` IS NULL LIMIT ".$pageStartFrom.",".$Limit;
+        $result= mysqli_query($this->conn,$query);
+        while($row=mysqli_fetch_object($result)){
+            $_allCity[]=$row;
+        }
+        return $_allCity;
+
+    }
+
+    public function allName(){
+        $_allName= array();
+        $query="SELECT name FROM `city`";
+        $result= mysqli_query($this->conn,$query);
+        while($row=mysqli_fetch_assoc($result)){
+            $_allName[]=$row['name'];
+        }
+        return $_allName;
+    }
+
+    public function allCity(){
+        $_allCity= array();
+        $query="SELECT city FROM `city`";
+        $result= mysqli_query($this->conn,$query);
+        while($row=mysqli_fetch_assoc($result)){
+            $_allCity[]=$row['city'];
+        }
+        return $_allCity;
     }
 }
