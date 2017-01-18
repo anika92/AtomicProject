@@ -6,7 +6,7 @@ use App\Bitm\SEIP1292\Utility\Utility;
 Class Book{
     public $id="";
     public $title="";
-    public $title1="";
+
     public $description="";
     public $filterByTitle="";
     public $filterByDescription="";
