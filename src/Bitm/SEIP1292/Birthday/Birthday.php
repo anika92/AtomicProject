@@ -7,7 +7,7 @@ Class Birthday
 {
     public $id = "";
     public $name = "";
-
+    public $name1 = "";
     public $date;
     public $conn;
     public $deleted_at;
