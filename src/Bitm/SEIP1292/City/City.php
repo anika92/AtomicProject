@@ -7,6 +7,7 @@ Class City
 {
     public $id = "";
     public $name = "";
+    public $name1 = "";
     public $city = "";
     public $conn;
     public $filterByTitle="";
